@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces rating change</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            const handles = ['Thallium_is_Vegetable', 'trl777', 'coslade', 'woshiruozhi', 'zy233123', 'EvelynClarke', 'Labcdefg', 'uin', 'Second_Draper', 'Infinitewave', 'badl178', 'Iridescent', 'Freshfish', 'Salty_Fish_', 'Seventeen_Stckles', 'ywsjlslc', 'yuLeave', 'Cncn_', '5cdc2019', 'barar', 'ubrightness', 'drizzling', 'bandiaoz', 'TheSunspot', 'zuimao', 'Sylvanaswind', 'lavender_', 'Spirits_F', 'lyx1656', 'dazhao', 'hzeroto', 'TTWW', '1zpcsdf', 'lxhabc666', 'swiftlife', 'yan1xiang', 'BackNumber', 'wzjTnT', 'pokerfacecyf', 'XZY666', 'dragonprince', '1814234280', '1guBgu777'];
+            data.addColumn('datetime', 'date');
+            // handles.forEach(handle => {
+            //     data.addColumn('number',handle);
+            // });
+            data.addColumn('number', 'me');
+            fetch('https://codeforces.com/api/user.rating?handle=Thallium_is_Vegetable')
+                .then(data => data.json())
+                .then(res => {
+                    console.log(res.result);
+                    res.result.forEach(element => data.addRow([new Date(element.ratingUpdateTimeSeconds * 1000), element.newRating]));
+                    var options = {
+                        title: 'Rating Change',
+                        legend: { position: 'right' }
+                    };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                    chart.draw(data, options);
+                })
+
+            // data.addRow([new Date(1579711500000),1500])
+            console.log(data);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="curve_chart" style="width: 1100px; height: 700px"></div>
+</body>
+
+</html>
