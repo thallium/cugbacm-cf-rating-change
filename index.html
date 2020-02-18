@@ -22,7 +22,6 @@
             fetch('https://codeforces.com/api/user.rating?handle=' + handle)
                 .then(data => data.json())
                 .then(res => {
-                    console.log(res.result);
                     res.result.forEach(element => data.addRow([new Date(element.ratingUpdateTimeSeconds * 1000), element.newRating]));
                     var options = {
                         title: 'Rating Change',
@@ -33,16 +32,12 @@
 
                     chart.draw(data, options);
                 })
-
-            // data.addRow([new Date(1579711500000),1500])
-            console.log(data);
-
         }
     </script>
 </head>
 
 <body>
-    <div id="linechart_material" style="width: 1100px; height: 700px"></div>
+    <div id="linechart_material" style="width: 70vw; height: 70vh"></div>
 </body>
 
 </html>
