@@ -18,9 +18,7 @@ window.onload=function(){
             headers:{
                 'Access-Control-Allow-Origin': 'https://codeforces.com'
             },
-            mode:'cors'
-        })
-            .then(data => data.json())
+        }).then(data => data.json())
             .then(res => {
                 res.result.forEach(data=>{
                     rating.push([data.rating,data.handle]);
