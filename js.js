@@ -60,14 +60,15 @@ window.onload = function() {
             });
             
             ratings.forEach(hAndR => {
-                var para = document.createElement("p");
+                var para = document.createElement("a");
                 $(para).attr("id", hAndR.handle);
+                $(para).attr("href", "https://codeforces.com/profile/"+hAndR.handle);
                 if (hAndR.rating >= 1900) $(para).attr("class", "CMaster");
                 else if (hAndR.rating >= 1600) $(para).attr("class", "expert");
                 else if (hAndR.rating >= 1400) $(para).attr("class", "specialist");
                 else if (hAndR.rating >= 1200) $(para).attr("class", "pupil");
                 else $(para).attr("class", "newbie");
-                para.innerHTML = hAndR.handle + " " + hAndR.rating;
+                para.innerHTML = hAndR.handle + " " + hAndR.rating+"</br>";
                 $("#all").append(para);
             });
         }

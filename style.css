@@ -10,7 +10,10 @@
 .newbie{
     color: rgb(128, 128, 128);
 }
-p{
+a{
     font-size: large;
+    font-family: sans-serif;
+}
+h2{
     font-family: sans-serif;
 }
