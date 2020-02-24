@@ -1,0 +1,15 @@
+.expert{
+    color: rgb(0, 0, 255);
+}
+.specialist{
+    color:rgb(3, 168, 158);
+}
+.pupil{
+    color:rgb(0, 128, 0);
+}
+.newbie{
+    color: rgb(128, 128, 128);
+}
+p{
+    font-size: large;
+}

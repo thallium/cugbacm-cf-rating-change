@@ -1,34 +1,79 @@
-const handles = ['Thallium_is_Vegetable', 'trl777', 'coslade', 'woshiruozhi', 'zy233123', 'EvelynClarke', 'Labcdefg', 'uin', 'Second_Draper', 'Infinitewave', 'badl178', 'Iridescent', 'Freshfish', 'Salty_Fish_', 'Seventeen_Stckles', 'ywsjlslc', 'yuLeave', 'Cncn_', '5cdc2019', 'barar', 'ubrightness', 'drizzling', 'bandiaoz', 'TheSunspot', 'zuimao', 'Sylvanaswind', 'lavender_', 'Spirits_F', 'lyx1656', 'dazhao', 'hzeroto', 'TTWW', '1zpcsdf', 'lxhabc666', 'swiftlife', 'yan1xiang', 'BackNumber', 'wzjTnT', 'pokerfacecyf', 'XZY666', 'dragonprince', '1814234280', '1guBgu777'];
-const URL='https://codeforces.com/api/user.info?handles=';
-window.onload=function(){
-    var rating=[];
-    var allHandles="";
-    handles.forEach(handle=>allHandles+=handle+';');
-        // $.getJSON(URL+allHandles,
-        //     res=>{
-        //         console.log(res.result);
-        //         res.result.forEach(data=>{
-        //             rating.push([data.rating,data.handle]);
-        //         })
-        //     }
-        // )
+const handles = [
+    "wongdark2017",
+    "trl777",
+    "Thallium_is_Vegetable",
+    "coslade",
+    "woshiruozhi",
+    "zy233123",
+    "EvelynClarke",
+    "Labcdefg",
+    "uin",
+    "Second_Draper",
+    "Infinitewave",
+    "badl178",
+    "Iridescent.",
+    "Freshfish",
+    "Salty_Fish_",
+    "Seventeen_Stckles",
+    "ywsjlslc",
+    "yuLeave",
+    "Cncn_",
+    "5cdc2019",
+    "barar",
+    "ubrightness",
+    "drizzling",
+    "bandiaoz",
+    "TheSunspot",
+    "zuimao",
+    "Sylvanaswind",
+    "lavender_",
+    "Spirits_F",
+    "lyx1656",
+    "dazhao",
+    "hzeroto",
+    "TTWW",
+    "1zpcsdf",
+    "lxhabc666",
+    "swiftlife",
+    "yan1xiang",
+    "BackNumber",
+    "wzjTnT",
+    "dragonprince",
+    "1guBgu777"
+];
+const URL = "https://codeforces.com/api/user.info?handles=";
+window.onload = function() {
+  var ratings = [];
+  var allHandles = "";
+  handles.forEach(handle => (allHandles += handle + ";"));
 
-        
-        fetch(URL+ allHandles,{
-            headers:{
-                'Access-Control-Allow-Origin': 'https://codeforces.com'
-            },
-        }).then(data => data.json())
-            .then(res => {
-                res.result.forEach(data=>{
-                    rating.push([data.rating,data.handle]);
-                })
-            })
-        handles.forEach(handle=>{
-            var para=document.createElement('p');
-            para.innerHTML=handle;
-            $("#all").append(para);
-        })
-    rating.sort();
-    console.log(rating);
+  $.ajax({
+    url: URL + allHandles,
+    dataType: "json",
+    success: function(data) {
+      data.result.forEach(data =>{
+        if(data.rating!=undefined)
+        ratings.push({ rating: data.rating, handle: data.handle })
+      });
+    //   console.log(data.result);
+      ratings.sort((a, b) => {
+        return a.rating < b.rating;
+      });
+      
+      ratings.forEach(hAndR => {
+        var para = document.createElement("p");
+        $(para).attr("id",hAndR.handle);
+        if(hAndR.rating>=1900) $(para).attr("class","CMaster");
+        else if(hAndR.rating>=1600) $(para).attr("class","expert");
+        else if(hAndR.rating>=1400) $(para).attr("class","specialist");
+        else if(hAndR.rating>=1200) $(para).attr("class","pupil");
+        else  $(para).attr("class","newbie");
+        para.innerHTML=hAndR.handle+' '+hAndR.rating;
+        // para.innerHTML = "fuck";
+        $("#all").append(para);
+
+      });
+      console.log(ratings);
+    }
+  });
 };
