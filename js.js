@@ -61,15 +61,18 @@ window.onload = function() {
             
             ratings.forEach(hAndR => {
                 var para = document.createElement("a");
+                var r=document.createElement('p');
+                $(r).html(hAndR.rating);
                 $(para).attr("id", hAndR.handle);
                 $(para).attr("href", "https://codeforces.com/profile/"+hAndR.handle);
-                if (hAndR.rating >= 1900) $(para).attr("class", "CMaster");
-                else if (hAndR.rating >= 1600) $(para).attr("class", "expert");
-                else if (hAndR.rating >= 1400) $(para).attr("class", "specialist");
-                else if (hAndR.rating >= 1200) $(para).attr("class", "pupil");
-                else $(para).attr("class", "newbie");
-                para.innerHTML = hAndR.handle + " " + hAndR.rating+"</br>";
-                $("#all").append(para);
+                if (hAndR.rating >= 1900) {$(para).attr("class", "CMaster");$(r).attr("class", "CMaster");}
+                else if (hAndR.rating >= 1600) {$(para).attr("class", "expert");$(r).attr("class", "expert");}
+                else if (hAndR.rating >= 1400) {$(para).attr("class", "specialist");$(r).attr("class", "specialist");}
+                else if (hAndR.rating >= 1200) {$(para).attr("class", "pupil");$(r).attr("class", "pupil");}
+                else {$(para).attr("class", "newbie");$(r).attr("class", "newbie");}
+                para.innerHTML = hAndR.handle;
+                $(r).prepend(para);
+                $("#all").append(r);
             });
         }
     });
