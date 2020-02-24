@@ -43,37 +43,33 @@ const handles = [
 ];
 const URL = "https://codeforces.com/api/user.info?handles=";
 window.onload = function() {
-  var ratings = [];
-  var allHandles = "";
-  handles.forEach(handle => (allHandles += handle + ";"));
-
-  $.ajax({
-    url: URL + allHandles,
-    dataType: "json",
-    success: function(data) {
-      data.result.forEach(data =>{
-        if(data.rating!=undefined)
-        ratings.push({ rating: data.rating, handle: data.handle })
-      });
-    //   console.log(data.result);
-      ratings.sort((a, b) => {
-        return a.rating < b.rating;
-      });
-      
-      ratings.forEach(hAndR => {
-        var para = document.createElement("p");
-        $(para).attr("id",hAndR.handle);
-        if(hAndR.rating>=1900) $(para).attr("class","CMaster");
-        else if(hAndR.rating>=1600) $(para).attr("class","expert");
-        else if(hAndR.rating>=1400) $(para).attr("class","specialist");
-        else if(hAndR.rating>=1200) $(para).attr("class","pupil");
-        else  $(para).attr("class","newbie");
-        para.innerHTML=hAndR.handle+' '+hAndR.rating;
-        // para.innerHTML = "fuck";
-        $("#all").append(para);
-
-      });
-      console.log(ratings);
-    }
-  });
+    var ratings = [];
+    var allHandles = "";
+    handles.forEach(handle => (allHandles += handle + ";"));
+    
+    $.ajax({
+        url: URL + allHandles,
+        dataType: "json",
+        success: function(data) {
+            data.result.forEach(data => {
+                if (data.rating != undefined)
+                ratings.push({ rating: data.rating, handle: data.handle });
+            });
+            ratings.sort((a, b) => {
+                return a.rating < b.rating;
+            });
+            
+            ratings.forEach(hAndR => {
+                var para = document.createElement("p");
+                $(para).attr("id", hAndR.handle);
+                if (hAndR.rating >= 1900) $(para).attr("class", "CMaster");
+                else if (hAndR.rating >= 1600) $(para).attr("class", "expert");
+                else if (hAndR.rating >= 1400) $(para).attr("class", "specialist");
+                else if (hAndR.rating >= 1200) $(para).attr("class", "pupil");
+                else $(para).attr("class", "newbie");
+                para.innerHTML = hAndR.handle + " " + hAndR.rating;
+                $("#all").append(para);
+            });
+        }
+    });
 };
