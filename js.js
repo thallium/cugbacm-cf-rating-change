@@ -19,16 +19,18 @@ window.onload=function(){
         //     },
         //     mode:'cors'
         // }
-        fetch(URL+ allHandles)
-            .then(data => data.json())
-            .then(res => {
-                res.result.forEach(data=>{
-                    rating.push([data.rating,data.handle]);
-                })
-            })
-        var para=document.createElement('p');
-        // para.innerHTML=handle;
-        // $("#all").append(para);
+        // fetch(URL+ allHandles)
+        //     .then(data => data.json())
+        //     .then(res => {
+        //         res.result.forEach(data=>{
+        //             rating.push([data.rating,data.handle]);
+        //         })
+        //     })
+        handles.forEach(handle=>{
+            var para=document.createElement('p');
+            para.innerHTML=handle;
+            $("#all").append(para);
+        })
     rating.sort();
     console.log(rating);
 };
