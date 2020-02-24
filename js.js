@@ -13,13 +13,13 @@ window.onload=function(){
         //     }
         // )
 
-        // ,{
-        //     headers:{
-        //         'Access-Control-Allow-Origin': 'https://codeforces.com'
-        //     },
-        //     mode:'cors'
-        // }
-        fetch(URL+ allHandles)
+        
+        fetch(URL+ allHandles,{
+            headers:{
+                'Access-Control-Allow-Origin': 'https://codeforces.com'
+            },
+            mode:'cors'
+        })
             .then(data => data.json())
             .then(res => {
                 res.result.forEach(data=>{
