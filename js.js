@@ -51,7 +51,6 @@ window.onload = function() {
         url: URL + allHandles,
         dataType: "json",
         success: function(data) {
-            console.log(data.result);
             data.result.forEach(data => {
                 if (data.rating != undefined)
                 ratings.push({ rating: data.rating, handle: data.handle });
@@ -59,7 +58,6 @@ window.onload = function() {
             ratings.sort((a, b) => {
                 return a.rating > b.rating?-1:1;
             });
-            console.log(ratings);
             ratings.forEach(hAndR => {
                 var para = document.createElement("a");
                 var r=document.createElement('p');
