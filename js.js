@@ -39,7 +39,8 @@ const handles = [
     "BackNumber",
     "wzjTnT",
     "dragonprince",
-    "1guBgu777"
+    "1guBgu777",
+    "cytus_lee"
 ];
 const URL = "https://codeforces.com/api/user.info?handles=";
 window.onload = function() {
