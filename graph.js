@@ -41,16 +41,24 @@ function drawChart() {
     partialHandles.forEach(handle => { data.addColumn('number',handle);});
     var options = {
         title: 'Rating Change',
-        legend: { position: 'right' }
+        legend: { position: 'right' },
+        hAxis: {
+            format: 'MMM yyyy'
+        },
+        vAxis: {
+            viewWindowMode: 'pretty'
+        },
+        colors: colors,
+        curveType: 'function'
     };
     var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
     console.log("fuck")
     data.addRows(alignTimeline(ratings));
-    chart.draw(data,options);
+    chart.draw(data, options);
 
 }
 
-function displayRating(){
+function displayRating() {
     const URL_INFO = "https://codeforces.com/api/user.info?handles=";
     var ratings = [];
     var allHandles = "";
