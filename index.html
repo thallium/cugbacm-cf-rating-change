@@ -8,40 +8,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript">
-        // var handle = prompt("Please enter your cf handle");
-        var handle = 'Thallium_is_Vegetable';
-        google.charts.load('current', { 'packages': ['line'] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            const handles = ['Thallium_is_Vegetable', 'trl777', 'coslade', 'woshiruozhi', 'zy233123', 'EvelynClarke', 'Labcdefg', 'uin', 'Second_Draper', 'Infinitewave', 'badl178', 'Iridescent', 'Freshfish', 'Salty_Fish_', 'Seventeen_Stckles', 'ywsjlslc', 'yuLeave', 'Cncn_', '5cdc2019', 'barar', 'ubrightness', 'drizzling', 'bandiaoz', 'TheSunspot', 'zuimao', 'Sylvanaswind', 'lavender_', 'Spirits_F', 'lyx1656', 'dazhao', 'hzeroto', 'TTWW', '1zpcsdf', 'lxhabc666', 'swiftlife', 'yan1xiang', 'BackNumber', 'wzjTnT', 'pokerfacecyf', 'XZY666', 'dragonprince', '1814234280', '1guBgu777','cytus_lee'];
-            data.addColumn('datetime', 'date');
-            // handles.forEach(handle => {
-            //     data.addColumn('number',handle);
-            // });
-            var options = {
-                title: 'Rating Change',
-                legend: { position: 'right' }
-            };
-            var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-            data.addColumn('number', handle);
-
-            fetch('https://codeforces.com/api/user.rating?handle=' + handle,)
-                .then(data => data.json())
-                .then(res => {
-                    // console.log(res);
-                    res.result.forEach(element =>
-                        data.addRow([new Date(element.ratingUpdateTimeSeconds * 1000), element.newRating]));
-                        chart.draw(data, google.charts.Line.convertOptions(options));
-                })
-
-            // console.log(data);
-        }
-    </script>
-    <script src="js.js"></script>
+    <script src="graph.js" type="text/javascript"> </script>
+    <script src="graph_helper.js"></script>
+    <!-- <script src="js.js"></script> -->
 </head>
 
 <body>
