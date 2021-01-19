@@ -48,7 +48,6 @@ function drawChart() {
         vAxis: {
             viewWindowMode: 'pretty'
         },
-        colors: colors,
         curveType: 'function'
     };
     var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
