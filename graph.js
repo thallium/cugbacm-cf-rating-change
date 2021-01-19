@@ -1,6 +1,6 @@
 // var handle = prompt("Please enter your cf handle");
 const URL='https://codeforces.com/api/user.rating?handle='
-const handles = [ "wongdark2017", "trl777", "Thallium54", "coslade", "woshiruozhi", "zy233123", "EvelynClarke", "Labcdefg", "uin", "Second_Draper", "Infinitewave", "badl178", "Iridescent.", "Freshfish", "Salty_Fish_", "Seventeen_Stckles", "ywsjlslc", "yuLeave", "Cncn_", "5cdc2019", "barar", "ubrightness", "drizzling", "bandiaoz", "TheSunspot", "zuimao", "Sylvanaswind", "lavender_", "Spirits_F", "lyx1656", "dazhao", "hzeroto", "TTWW", "1zpcsdf", "lxhabc666", "swiftlifeinvj", "yan1xiang", "BackNumber", "wzjTnT", "dragonprince", "1guBgu777", "cytus_lee" ];
+const handles = [ "wongdark2017", "trl777", "Thallium54", "coslade", "woshiruozhi", "zy233123", "EvelynClarke", "Labcdefg", "uin", "Second_Draper", "Infinitewave", "badl178", "Iridescent.", "Freshfish", "Salty_Fish_", "Seventeen_Stckles", "ywsjlslc", "yuLeave", "Cncn_", "5cdc2019", "barar", "ubrightness", "drizzling", "bandiaoz", "TheSunspot", "zuimao", "Sylvanaswind", "lavender_", "Spirits_F", "lyx1656", "dazhao", "hzeroto", "yukun80", "1zpcsdf", "lxhabc666", "swiftlifeinvj", "yan1xiang", "BackNumber", "wzjTnT", "dragonprince", "1guBgu777", "cytus_lee" ];
 const partialHandles = ['Thallium54', 'trl777','hzeroto','swiftlifeinvj']
 
 var ratings = [];
