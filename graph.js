@@ -3,59 +3,52 @@ const URL='https://codeforces.com/api/user.rating?handle='
 const handles = [ "wongdark2017", "trl777", "Thallium54", "coslade", "woshiruozhi", "zy233123", "EvelynClarke", "Labcdefg", "uin", "Second_Draper", "Infinitewave", "badl178", "Iridescent.", "Freshfish", "Salty_Fish_", "Seventeen_Stckles", "ywsjlslc", "yuLeave", "Cncn_", "5cdc2019", "barar", "ubrightness", "drizzling", "bandiaoz", "TheSunspot", "zuimao", "Sylvanaswind", "lavender_", "Spirits_F", "lyx1656", "dazhao", "hzeroto", "yukun80", "1zpcsdf", "lxhabc666", "swiftlifeinvj", "yan1xiang", "BackNumber", "wzjTnT", "dragonprince", "1guBgu777", "cytus_lee" ];
 const partialHandles = ['Thallium54', 'trl777','hzeroto','swiftlifeinvj']
 
-var ratings = [];
+var ratingChanges=[];
 
-$(document).ready(function(){
-    displayRating();
-    getData();
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-    // $.when().then(function(){
-    // })
-})
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart);
+displayRating();
 
 function getData(){
-    partialHandles.forEach(handle=>{
-        // $.ajax({
-        //     url: URL + handle,
-        //     dataType: "json",
-        //     success: function (res) {
-        //         ratings.push([]);
-        //         res.result.forEach(data => {
-        //             ratings[ratings.length-1].push([data.ratingUpdateTimeSeconds,data.newRating ]);
-        //         });
-        //     }
-        // });
-        fetch(URL+handle).then(data=>data.json()).then(res=>{
-            ratings.push([])
-            res.result.forEach(data => {
-                ratings[ratings.length-1].push([data.ratingUpdateTimeSeconds,data.newRating ]);
-            });
+    let promise;
+    partialHandles.forEach(handle => {
+        promise = fetch(URL + handle).then(data => data.json()).then(res => {
+            console.log(res)
+            ratingChanges.push(res.result);
         })
     });
-
+    return promise;
 }
 function drawChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('datetime', 'date');
-    partialHandles.forEach(handle => { data.addColumn('number',handle);});
-    var options = {
-        title: 'Rating Change',
-        legend: { position: 'right' },
-        hAxis: {
-            format: 'MMM yyyy'
-        },
-        vAxis: {
-            viewWindowMode: 'pretty'
-        },
-        curveType: 'function'
-    };
-    var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
-    console.log("fuck")
-    data.addRows(alignTimeline(ratings));
-    chart.draw(data, options);
+    getData().then(()=>{
+        var data = new google.visualization.DataTable();
+        data.addColumn('datetime', 'date');
+        let ratings=[]
+        ratingChanges.forEach((ratingChange) => {
+            data.addColumn('number', ratingChange[0].handle)
+            ratings.push([])
+            ratingChange.forEach(data => {
+                ratings[ratings.length - 1].push([data.ratingUpdateTimeSeconds, data.newRating]);
+            });
+        })
+        var options = {
+            title: 'Rating Change',
+            legend: { position: 'right' },
+            hAxis: {
+                format: 'MMM yyyy'
+            },
+            vAxis: {
+                viewWindowMode: 'pretty'
+            },
+            curveType: 'function'
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
+        data.addRows(alignTimeline(ratings));
+        chart.draw(data, options);
 
+    })
 }
+
 
 function displayRating() {
     const URL_INFO = "https://codeforces.com/api/user.info?handles=";
