@@ -10,14 +10,14 @@ google.charts.setOnLoadCallback(drawChart);
 displayRating();
 
 function getData(){
-    let promise;
+    let promise=[];
     partialHandles.forEach(handle => {
-        promise = fetch(URL + handle).then(data => data.json()).then(res => {
+        promise.push(fetch(URL + handle).then(data => data.json()).then(res => {
             console.log(res)
             ratingChanges.push(res.result);
-        })
+        }))
     });
-    return promise;
+    return Promise.all(promise);
 }
 function drawChart() {
     getData().then(()=>{
